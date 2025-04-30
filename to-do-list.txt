@@ -1,0 +1,35 @@
+---- Egeltorp's Toolbox ----
+
+Main idea: A quick to run program with a bunch of random
+python tools listed below. An easy to use list to choose which program to run.
+ASCII cover art when running (like "Oh-My-Bash").
+
+--> Number Guessing Game
+Random number between 1–100, user tries to guess it. Track attempts.
+
+--> To-Do List in Terminal
+Add, view, and delete tasks. Keep it all in memory (no files yet).
+
+--> Simple Calculator
+Do basic math with user input. Bonus: support multiple operations in a row.
+
+--> Dice Roller
+Simulate rolling one or more dice. Optionally pick the number of sides.
+
+--> File Organizer
+Sort files in a folder into subfolders based on file type (jpg, txt, etc).
+
+--> Directory Lister
+Print the structure of folders and files in a given directory.
+
+--> Quiz App
+Ask the user multiple questions, track score. Bonus: randomize order.
+
+--> Password Generator
+Create strong passwords based on given criteria (length, symbols, etc).
+
+--> Rock Paper Scissors
+Play against the computer. Add score tracking or AI later.
+
+--> Countdown Timer
+Take a number of seconds and count down to zero.
