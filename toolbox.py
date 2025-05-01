@@ -12,8 +12,9 @@ import sys
                                                                                          
 def number_guessing_game():
     # Intro text
-    print("--> Alright, let's play a guessing game.")
-    print("--> Enter two numbers for the guessing machine.")
+    print_box("Number Guessing Game")
+    print("Alright, let's play a guessing game.")
+    print("Enter two numbers for the guessing machine.")
 
     # Lower bound integer variable with safety for ValueError
     while True:
@@ -53,10 +54,11 @@ def number_guessing_game():
     else:
         print("--> Unlucky guess... the number was actually " + str(num))
 
+    wait_before_menu()
 
 def even_or_odd():
     # Intro text
-    print("--> Even or Odd Checker")
+    print_box("Even or Odd Checker")
 
     # Integer variable with safety for ValueError
     while True:
@@ -77,9 +79,12 @@ def even_or_odd():
     if integer_to_check == 69 or integer_to_check == 420:
         print("Also: you're not funny boy!")
 
+    wait_before_menu()
+
 
 def dice_roller():
     # Loop for rolling dice and quitting loop
+    print_box("Dice Roller")
     print("--> Time to gamble! Or maybe not, but we can roll some dice I guess.")
     while True:
         choice = input("[R] to Roll / [Q] to Quit: ").lower()
@@ -98,12 +103,13 @@ def dice_roller():
         else:
             print("--> Really...? That is NOT a valid choice. Rethink!")
 
+    wait_before_menu()
+
 
 def quiz_game():
     # Sounds boring so I'm procrastinating it
-    print("Not done yet.")
-    time.sleep(2)
-    pass
+    print_box("Not done yet.")
+    wait_before_menu()
 
 
 def password_generator():
@@ -124,7 +130,7 @@ def password_generator():
     pick_set = chars * int((letter_count / char_count)/2) + letters
 
     # Intro
-    print("--> Time to generate a password.")
+    print_box("Password Generator")
 
     # Get the Minimum length for the password
     while True:
@@ -180,26 +186,18 @@ def password_generator():
     print("| ")
 
     # Animated second countdown
-    x_seconds = 9
-    for _ in range(x_seconds + 1):
-        sys.stdout.write(f"\r| Holding this screen for {x_seconds} seconds for time to copy.")
-        sys.stdout.flush()
-        time.sleep(1)
-        x_seconds -= 1
-    sys.stdout.flush()
+    wait_before_menu(9)
     print()
 
 
 def rock_paper_scissors():
-    print("Not done yet.")
-    time.sleep(2)
-    pass
+    print_box("Not done yet.")
+    wait_before_menu()
 
 
 def countdown_timer():
-    print("Not done yet.")
-    time.sleep(2)
-    pass
+    print_box("Not done yet.")
+    wait_before_menu()
 
 
 # --- Start-up Logo ---
@@ -213,15 +211,6 @@ def display_ascii_art():
 """
     print(ascii_art)
 
-def display_quit_ascii_art():
-    ascii_art_2 = """
-███████  ██████  ███████ ██      ████████  ██████  ██████  ██████  
-██      ██       ██      ██         ██    ██    ██ ██   ██ ██   ██ 
-█████   ██   ███ █████   ██         ██    ██    ██ ██████  ██████  
-██      ██    ██ ██      ██         ██    ██    ██ ██   ██ ██      
-███████  ██████  ███████ ███████    ██     ██████  ██   ██ ██                                                                                                                                          
-"""
-    print(ascii_art_2)
 
 # --- Show the tool select screen ---
 def show_menu():
@@ -295,6 +284,17 @@ def print_box(content):
 
     #Bottom border
     print("+" + "-" * (width - 2) + "+")
+
+def wait_before_menu(delay_seconds=3):
+    print()
+    for _ in range(delay_seconds + 1):
+        sys.stdout.write(f"\r| Showing Toolbox in {delay_seconds} seconds")
+        sys.stdout.flush()
+        time.sleep(1)
+        delay_seconds -= 1
+    sys.stdout.flush()
+    print("\n \n \n ")
+    
 
 if __name__ == "__main__":
     main()
