@@ -4,7 +4,47 @@ import time
 # --- Function definitions ---
 
 def number_guessing_game():
-    pass
+    # Intro text
+    print("--> Alright, let's play a guessing game.")
+    print("--> Enter two numbers or the guessing machine.")
+
+    # Lower bound integer variable with safety for ValueError
+    while True:
+        try:
+            lower_bound = int(input("Lower bound integer: "))
+            break  # input was valid, break out of loop
+        except ValueError:
+            print("--> Not a valid integer. Try again.")
+
+    # Upper bound integer variable with safety for ValueError
+    while True:
+        try:
+            upper_bound = int(input("Upper bound integer: "))
+            break  # input was valid, break out of loop
+        except ValueError:
+            print("--> Not a valid integer. Try again.")
+
+    # Generate a random integer and assign it to num variable
+    num = random.randint(lower_bound, upper_bound)
+
+    # Display lower and upper bounds
+    print("--> Alright! Time to guess.")
+    print("--> Lower bound: " + str(lower_bound))
+    print("--> Upper bound: " + str(upper_bound))
+
+    # Assigning user input to guess variable with safety for ValueError
+    while True:
+        try:
+            guess = int(input("Your guess: "))
+            break
+        except ValueError:
+            print("--> Not a valid guess. Try an integer.")
+
+    # Checking if the guess variable is the same as the num variable
+    if guess == num:
+        print("--> Correct! The number was " + str(num))
+    else:
+        print("--> Unlucky guess... the number was actually " + str(num))
 
 def simple_calculator():
     pass
@@ -59,7 +99,7 @@ def main():
 
     while True:
 
-        choice = input("Enter your choice (1-8): ")
+        choice = input("Enter your choice of game (1-8): ")
 
         if choice == "0":
             show_menu()
@@ -78,9 +118,11 @@ def main():
         elif choice == "7":
             countdown_timer()
         elif choice == "8":
-            print("See you later, I guess.")
+            print("--> See you later, I guess.")
+            time.sleep(0.5)
+            exit()
         else:
-            print("Invalid choice. Please choose between 1-8.")
+            print("--> Invalid choice. Please choose between 1-8.")
 
 if __name__ == "__main__":
     main()
