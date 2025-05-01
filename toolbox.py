@@ -1,5 +1,6 @@
 import random
 import time
+import sys
 
 # --- Function definitions ---
 
@@ -29,8 +30,8 @@ def number_guessing_game():
 
     # Display lower and upper bounds
     print("--> Alright! Time to guess.")
-    print("--> Lower bound: " + str(lower_bound))
-    print("--> Upper bound: " + str(upper_bound))
+    print("-> Lower bound: " + str(lower_bound))
+    print("-> Upper bound: " + str(upper_bound))
 
     # Assigning user input to guess variable with safety for ValueError
     while True:
@@ -70,8 +71,24 @@ def even_or_odd():
         print("Also: you're not funny boy!")
 
 def dice_roller():
-    print("Not done yet.")
-    pass
+    # Loop for rolling dice and quitting loop
+    print("--> Time to gamble! Or maybe not, but we can roll some dice I guess.")
+    while True:
+        choice = input("[R] to Roll / [Q] to Quit: ").lower()
+
+        if choice == "r":
+            print("Rolling...")
+            for _ in range(15): # Simulate 10 rolls for cool effect
+                dice_roll = random.randint(1, 6)
+                sys.stdout.write(f"\r{dice_roll}   ")
+                sys.stdout.flush()
+                time.sleep(0.1)
+            sys.stdout.flush()
+            print(f"\nBoom! You rolled a {dice_roll}!")  # Print the final result
+        elif choice == "q":
+            break
+        else:
+            print("--> Really...? That is NOT a valid choice. Rethink!")
 
 def quiz_game():
     print("Not done yet.")
@@ -107,8 +124,10 @@ def display_ascii_art():
 
 # --- Show the tool select screen ---
 def show_menu():
-    print("\nSelect a program to run from the toolbox:")
-    print("0. Show this menu.")
+    print("\n--> Select a program to run from the toolbox:")
+    print()
+    print("0. Show this list")
+    print()
     print("1. Number Guessing Game")
     print("2. Even or Odd")
     print("3. Dice Roller")
@@ -120,11 +139,12 @@ def show_menu():
 
 def main():
     display_ascii_art() # Show ASCII-art on Start-up
-    show_menu() # Show the Menu Interface
 
     while True:
+        show_menu() # Show the Menu Interface
         print()
-        choice = input("Enter your choice of game (1-8): ")
+        choice = input("Enter your choice of game (0 - 8): ")
+        print()
 
         if choice == "0":
             show_menu()
@@ -147,7 +167,22 @@ def main():
             time.sleep(0.5)
             exit()
         else:
-            print("--> Invalid choice. Please choose between 1-8.")
+            print("--> Invalid choice. Please choose between 0 - 8.")
+            print("Help: Choose 0 for the list of choices.")
 
 if __name__ == "__main__":
     main()
+
+#   _____   _____       ___   ____   ____  ________                               
+#  |_   _| |_   _|    .'   `.|_  _| |_  _||_   __  |                              
+#    | |     | |     /  .-.  \ \ \   / /    | |_ \_|                              
+#    | |     | |   _ | |   | |  \ \ / /     |  _| _                               
+#   _| |_   _| |__/ |\  `-'  /   \ ' /     _| |__/ |                              
+#  |_____| |________| `.___.'     \_/     |________|                              
+#   ____    ____   ___   ____  _____  ___  ____   ________  ____  ____   ______   
+#  |_   \  /   _|.'   `.|_   \|_   _||_  ||_  _| |_   __  ||_  _||_  _|.' ____ \  
+#    |   \/   | /  .-.  \ |   \ | |    | |_/ /     | |_ \_|  \ \  / /  | (___ \_| 
+#    | |\  /| | | |   | | | |\ \| |    |  __'.     |  _| _    \ \/ /    _.____`.  
+#   _| |_\/_| |_\  `-'  /_| |_\   |_  _| |  \ \_  _| |__/ |   _|  |_   | \____) | 
+#  |_____||_____|`.___.'|_____|\____||____||____||________|  |______|   \______.' 
+#                                                                                 
