@@ -1,6 +1,7 @@
 import random
 import time
 
+
 # --- Start-up Logo ---
 def display_ascii_art():
     ascii_art = """
