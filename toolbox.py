@@ -1,6 +1,29 @@
 import random
 import time
 
+# --- Function definitions ---
+
+def number_guessing_game():
+    pass
+
+def simple_calculator():
+    pass
+
+def dice_roller():
+    pass
+
+def quiz_game():
+    pass
+
+def password_generator():
+    pass
+
+def rock_paper_scissors():
+    pass
+
+def countdown_timer():
+    pass
+
 
 # --- Start-up Logo ---
 def display_ascii_art():
@@ -17,8 +40,10 @@ def display_ascii_art():
 """
     print(ascii_art)
 
+# --- Show the tool select screen ---
 def show_menu():
     print("\nSelect a program to run from the toolbox:")
+    print("0. Show this menu.")
     print("1. Number Guessing Game")
     print("2. Simple Calculator")
     print("3. Dice Roller")
@@ -30,10 +55,32 @@ def show_menu():
 
 def main():
     display_ascii_art() # Show ASCII-art on Start-up
+    show_menu() # Show the Menu Interface
+
     while True:
-        show_menu() # Show the Menu Interface
 
         choice = input("Enter your choice (1-8): ")
+
+        if choice == "0":
+            show_menu()
+        elif choice == "1":
+            number_guessing_game()
+        elif choice == "2":
+            simple_calculator()
+        elif choice == "3":
+            dice_roller()
+        elif choice == "4":
+            quiz_game()
+        elif choice == "5":
+            password_generator()
+        elif choice == "6":
+            rock_paper_scissors()
+        elif choice == "7":
+            countdown_timer()
+        elif choice == "8":
+            print("See you later, I guess.")
+        else:
+            print("Invalid choice. Please choose between 1-8.")
 
 if __name__ == "__main__":
     main()
