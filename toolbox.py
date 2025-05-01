@@ -205,23 +205,28 @@ def countdown_timer():
 # --- Start-up Logo ---
 def display_ascii_art():
     ascii_art = """
-  ___          _ _                _    
- | __|__ _ ___| | |_ ___ _ _ _ __( )___
- | _|/ _` / -_) |  _/ _ \ '_| '_ \/(_-<
- |___\__, \___|_|\__\___/_| | .__/ /__/
-     |___/                  |_|        
-         _____         _ _             
-        |_   _|__  ___| | |__  _____ __
-          | |/ _ \/ _ \ | '_ \/ _ \ \ /
-          |_|\___/\___/_|_.__/\___/_\_\                                                                              
+ _____           _ _               
+|_   _|__   ___ | | |__   _____  __
+  | |/ _ \ / _ \| | '_ \ / _ \ \/ /
+  | | (_) | (_) | | |_) | (_) >  < 
+  |_|\___/ \___/|_|_.__/ \___/_/\_\                                                                                                   
 """
     print(ascii_art)
 
+def display_quit_ascii_art():
+    ascii_art_2 = """
+███████  ██████  ███████ ██      ████████  ██████  ██████  ██████  
+██      ██       ██      ██         ██    ██    ██ ██   ██ ██   ██ 
+█████   ██   ███ █████   ██         ██    ██    ██ ██████  ██████  
+██      ██    ██ ██      ██         ██    ██    ██ ██   ██ ██      
+███████  ██████  ███████ ███████    ██     ██████  ██   ██ ██                                                                                                                                          
+"""
+    print(ascii_art_2)
+
 # --- Show the tool select screen ---
 def show_menu():
-    print("\n--> Select a program to run from the toolbox:")
-    print()
-    print("0. Show this list")
+    #print("\n--> Select a program to run from the toolbox:")
+    print_box("Available Tools")
     print()
     print("1. [DONE] Number Guessing Game")
     print("2. [DONE] Even or Odd")
@@ -230,7 +235,9 @@ def show_menu():
     print("5. [WORK] Password Generator")
     print("6. [....] Rock, Paper, Scissors!")
     print("7. [....] Countdown Timer")
-    print("8. Exit")
+    print()
+    print("Q. Exit")
+    print()
 
 def main():
     display_ascii_art() # Show ASCII-art on Start-up
@@ -241,13 +248,10 @@ def main():
         print()
 
         # Ask for choice input
-        choice = input("Enter your choice of game (0 - 8): ")
+        choice = input("Enter your choice of program (1 - 7): ")
         print()
 
-        if choice == "0":
-            show_menu()
-
-        elif choice == "1":
+        if choice == "1":
             number_guessing_game()
 
         elif choice == "2":
@@ -268,20 +272,29 @@ def main():
         elif choice == "7":
             countdown_timer()
 
-        elif choice == "8":
-            print("--> See you later, I guess.")
-            time.sleep(0.5)
-            exit()
-
-        elif choice == "monkey":
-            for _ in range(10):
-                print("I LOVE MONKEYS")
-                time.sleep(0.2)
+        elif choice == "Q" or choice == "q":
+            print_box("Toolbox.py made by @egeltorp")
             time.sleep(1)
+            exit()
             
         else:
-            print("--> Invalid choice. Please choose between 0 - 8.")
-            print("Help: Choose 0 for the list of choices.")
+            print("! Invalid choice. Please choose between 1 - 7.")
+            time.sleep(2)
+            print("\n \n \n ")
+
+def print_box(content):
+    width = 20 + len(content)
+
+    #Top border
+    print("+" + "-" * (width - 2) + "+")
+
+    #Content line
+    padding = (width - 2 - len(content)) // 2
+    line = "|" + " " * padding + content + " " * (width - 2 - len(content) - padding) + "|"
+    print(line)
+
+    #Bottom border
+    print("+" + "-" * (width - 2) + "+")
 
 if __name__ == "__main__":
     main()
