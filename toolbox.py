@@ -46,22 +46,47 @@ def number_guessing_game():
     else:
         print("--> Unlucky guess... the number was actually " + str(num))
 
-def simple_calculator():
-    pass
+def even_or_odd():
+    # Intro text
+    print("--> Even or Odd Checker")
+
+    # Integer variable with safety for ValueError
+    while True:
+        try:
+            integer_to_check = int(input("Enter an integer: "))
+            break  # input was valid, break out of loop
+        except ValueError:
+            print("--> Not a valid integer. Try again.")
+
+    # Check if there is any remainder when dividing by 2, to see if even
+    # Then display result with an added bias string
+    if integer_to_check % 2 == 0:
+        print("The number " + str(integer_to_check) + " is luckily Even!")
+    else:
+        print("The number " + str(integer_to_check) + " is unfortunately Odd :(")
+
+    # For the "memelord" Elon Musk fans who can't understand actual humor
+    if integer_to_check == 69 or integer_to_check == 420:
+        print("Also: you're not funny boy!")
 
 def dice_roller():
+    print("Not done yet.")
     pass
 
 def quiz_game():
+    print("Not done yet.")
     pass
 
 def password_generator():
+    print("Not done yet.")
     pass
 
 def rock_paper_scissors():
+    print("Not done yet.")
     pass
 
 def countdown_timer():
+    print("Not done yet.")
     pass
 
 
@@ -85,7 +110,7 @@ def show_menu():
     print("\nSelect a program to run from the toolbox:")
     print("0. Show this menu.")
     print("1. Number Guessing Game")
-    print("2. Simple Calculator")
+    print("2. Even or Odd")
     print("3. Dice Roller")
     print("4. Quiz Game")
     print("5. Password Generator")
@@ -98,7 +123,7 @@ def main():
     show_menu() # Show the Menu Interface
 
     while True:
-
+        print()
         choice = input("Enter your choice of game (1-8): ")
 
         if choice == "0":
@@ -106,7 +131,7 @@ def main():
         elif choice == "1":
             number_guessing_game()
         elif choice == "2":
-            simple_calculator()
+            even_or_odd()
         elif choice == "3":
             dice_roller()
         elif choice == "4":
