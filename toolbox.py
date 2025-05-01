@@ -22,7 +22,7 @@ def number_guessing_game():
             lower_bound = int(input("Lower bound integer: "))
             break  # input was valid, break out of loop
         except ValueError:
-            print("--> Not a valid integer. Try again.")
+            print("! Not a valid integer. Try again.")
 
     # Upper bound integer variable with safety for ValueError
     while True:
@@ -30,15 +30,15 @@ def number_guessing_game():
             upper_bound = int(input("Upper bound integer: "))
             break  # input was valid, break out of loop
         except ValueError:
-            print("--> Not a valid integer. Try again.")
+            print("! Not a valid integer. Try again.")
 
     # Generate a random integer and assign it to num variable
     num = random.randint(lower_bound, upper_bound)
 
     # Display lower and upper bounds
-    print("--> Alright! Time to guess.")
-    print("-> Lower bound: " + str(lower_bound))
-    print("-> Upper bound: " + str(upper_bound))
+    print("Alright! Time to guess.")
+    print("Lower bound: " + str(lower_bound))
+    print("Upper bound: " + str(upper_bound))
 
     # Assigning user input to guess variable with safety for ValueError
     while True:
@@ -46,7 +46,7 @@ def number_guessing_game():
             guess = int(input("Your guess: "))
             break
         except ValueError:
-            print("--> Not a valid guess. Try an integer.")
+            print("! Not a valid guess. Try an integer.")
 
     # Checking if the guess variable is the same as the num variable
     if guess == num:
@@ -66,7 +66,7 @@ def even_or_odd():
             integer_to_check = int(input("Enter an integer: "))
             break  # input was valid, break out of loop
         except ValueError:
-            print("--> Not a valid integer. Try again.")
+            print("! Not a valid integer. Try again.")
 
     # Check if there is any remainder when dividing by 2, to see if even
     # Then display result with an added bias string
@@ -85,7 +85,7 @@ def even_or_odd():
 def dice_roller():
     # Loop for rolling dice and quitting loop
     print_box("Dice Roller")
-    print("--> Time to gamble! Or maybe not, but we can roll some dice I guess.")
+    print("Time to gamble! Or maybe not, but we can roll some dice I guess.")
     while True:
         choice = input("[R] to Roll / [Q] to Quit: ").lower()
 
@@ -101,7 +101,7 @@ def dice_roller():
         elif choice == "q":
             break
         else:
-            print("--> Really...? That is NOT a valid choice. Rethink!")
+            print("! Really? That is NOT a valid choice. Rethink!")
 
     wait_before_menu()
 
@@ -196,7 +196,28 @@ def rock_paper_scissors():
 
 
 def countdown_timer():
-    print_box("Not done yet.")
+    print_box("Countdown Timer")
+    print("Minutes and Seconds")
+
+    #Ask for minutes and seconds for the timer
+    while True:
+        try:
+            minutes = int(input("Enter Minutes: "))
+            seconds = int(input("Enter Seconds: "))
+            total = minutes * 60 + seconds
+            break
+        except ValueError:
+            print("! Not an integer. Try again.")
+
+    for remaining in range (total, -1, -1):
+        mins, secs = divmod(remaining, 60)
+        time_str = f"{mins:02d}:{secs:02d}"
+        sys.stdout.write(f"\rTime left: {time_str}")
+        sys.stdout.flush()
+        time.sleep(1)
+    print()
+    print("Done!")
+
     wait_before_menu()
 
 
@@ -221,9 +242,9 @@ def show_menu():
     print("2. [DONE] Even or Odd")
     print("3. [DONE] Dice Roller")
     print("4. [....] Quiz Game")
-    print("5. [WORK] Password Generator")
+    print("5. [DONE] Password Generator")
     print("6. [....] Rock, Paper, Scissors!")
-    print("7. [....] Countdown Timer")
+    print("7. [WORK] Countdown Timer")
     print()
     print("Q. Exit")
     print()
