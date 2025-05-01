@@ -22,5 +22,5 @@ Example:
 To Clone the repo:
 
 ```bash
-git clone git@github.com:YOUR_USERNAME/python-projects.git
+git clone git@github.com:egeltorp/python-projects.git
 cd python-projects
