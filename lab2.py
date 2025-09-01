@@ -2,6 +2,10 @@ import time
 import sys
 import os
 
+# Theodor Holmberg
+# Datorlaboration
+# 1 september 2025
+
 # Uppgift 1: Bränsleförbrukning 
 def uppgift_1():
     körsträcka_i_km = float(input("Ange körsträcka i km: "))
