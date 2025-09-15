@@ -26,7 +26,7 @@ def create_chocolate_bar(rows: int, cols: int):
 def print_chocolate_bar(matrix):
     print()
     for row in matrix:
-        print("  ".join(f"{col:>3}" for col in row))
+        print("  ".join(f"{col:>2}" for col in row))
 
 # func to 'chomp' away pieces of the chocolate bar
 def chomp(matrix: list, row: int, col: int):
@@ -43,7 +43,7 @@ def chomp(matrix: list, row: int, col: int):
     return matrix
 
 def check_winner(matrix: list):
-    return len(matrix) == 1
+    return matrix == [["P"]]
 
 def ask_cell_number(matrix: list):
     while True:
@@ -67,8 +67,15 @@ def play():
     intro()
 
     # ask for board (matrix) size
-    rows = max(2, min(9, int(input("[?] Hur många rader ska chokladbaren bestå av (2-9): "))))
-    cols = max(2, min(9, int(input("[?] Hur många kolumner ska chokladbaren bestå av (2-9): "))))
+    # break loop only if conditions satisfied
+    while True:
+        rows = int(input("[?] Hur många rader ska chokladbaren bestå av (2-9): "))
+        if 2 <= rows <= 9: break
+        print("Ogiltigt antal, försök igen!")
+    while True:
+        cols = int(input("[?] Hur många kolumner ska chokladbaren bestå av (2-9): "))
+        if 2 <= rows <= 9: break
+        print("Ogiltigt antal, försök igen!")
 
     # generate first matrix using user-input values
     matrix = create_chocolate_bar(rows, cols)
