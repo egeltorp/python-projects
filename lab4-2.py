@@ -57,4 +57,13 @@ def ask_cell_number(matrix: list):
             print("Ogiltig input, försök igen!")
             continue
 
-print_chocolate_bar(create_chocolate_bar(3,4))
+
+
+'''
+Trial run
+choco = create_chocolate_bar(3,4)
+print_chocolate_bar(choco)
+toBite = ask_cell_number(choco)
+result = chomp(choco, toBite[0], toBite[1])
+print_chocolate_bar(result)
+'''
