@@ -1,6 +1,13 @@
-# Laboration 4, del 1
+# Chomp Game
 # 2025-09-16
 # Theodor Holmberg
+
+def intro():
+    print("\n--- Välkommen till Chomp ---")
+    print("* I spelet kommer du utmanas om att välja ett blocknummer från spelplanen.")
+    print("* Det valda blocket och alla block under och till högre kommer att raderas.")
+    print("* Spelet går ut på att undvika att välja P, den spelare som väljer P förlorar och den andra spelaren vinner.")
+    print()
 
 # func to create the chocolate bar matrix
 def create_chocolate_bar(rows: int, cols: int):
@@ -17,6 +24,7 @@ def create_chocolate_bar(rows: int, cols: int):
 
 # print matrix in a formatted table
 def print_chocolate_bar(matrix):
+    print()
     for row in matrix:
         print("  ".join(f"{col:>3}" for col in row))
 
@@ -26,26 +34,23 @@ def chomp(matrix: list, row: int, col: int):
         return None
 
     result = []
-    # loops for each row, checks if row is before chomp -> 
-    # if true: keeps that row intact, appends to result
-    for r in range(len(matrix)):
-        if r < row:
-            # save whole row
-            result.append(matrix[r][:])
-        else:
-            # save only up to col index
-            result.append(matrix[r][:col])
-    return result
+    for r in range(row, len(matrix)):
+        del matrix[r][col:]
+
+    for r in range(len(matrix) - 1, -1, -1):
+        if not matrix[r]:
+            del matrix[r]
+    return matrix
 
 def check_winner(matrix: list):
-    return matrix == ["P"]
+    return len(matrix) == 1
 
 def ask_cell_number(matrix: list):
     while True:
         try:
-            choice = input("Välj en ruta: ").strip()
+            choice = input("> Välj en ruta: ").strip()
             if len(choice) != 2 or not choice.isdigit():
-                raise ValueError 
+                raise ValueError
 
             for row in range(len(matrix)):
                 for col in range(len(matrix[row])):
@@ -57,14 +62,44 @@ def ask_cell_number(matrix: list):
             print("Ogiltig input, försök igen!")
             continue
 
+def play():
+    # print instructions
+    intro()
 
+    # ask for board (matrix) size
+    rows = max(2, min(9, int(input("[?] Hur många rader ska chokladbaren bestå av (2-9): "))))
+    cols = max(2, min(9, int(input("[?] Hur många kolumner ska chokladbaren bestå av (2-9): "))))
 
-'''
-# Trial run
-choco = create_chocolate_bar(3,4)
-print_chocolate_bar(choco)
-row,col = ask_cell_number(choco)
-print(str(row) + "," + str(col))
-result = chomp(choco, row, col)
-print_chocolate_bar(result)
-'''
+    # generate first matrix using user-input values
+    matrix = create_chocolate_bar(rows, cols)
+    print_chocolate_bar(matrix)
+
+    current_player = 1
+
+    while True:
+        # print whose turn it is
+        if current_player == 1:
+            print("\nFörsta spelarens tur")
+        elif current_player == 2:
+            print("\nAndra spelarens tur")
+
+        # ask which cell to chomp
+        row,col = ask_cell_number(matrix)
+
+        # alter matrix using row,col indices
+        matrix = chomp(matrix, row, col)
+
+        # check after each chomp, before printing matrix
+        if check_winner(matrix) == True:
+            break
+
+        # print new matrix
+        print_chocolate_bar(matrix)
+
+        # change current player, 3-1=2, 3-2=1, alternating each loop
+        current_player = 3 - current_player
+
+    print(f"\n---> Endast P kvar. Spelare {current_player} vinner!")
+
+if __name__ == "__main__":
+    play()
