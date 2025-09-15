@@ -20,12 +20,27 @@ def create_chocolate_bar(rows: int, cols: int):
 # print chocolate bar in a formatted table
 def print_chocolate_bar(matrix):
     for row in matrix:
-        print("  ".join(row))
+        print("  ".join(f"{col:>3}" for col in row))
 
 # func to 'chomp' away pieces of the chocolate bar
-def chomp(chocolate: bar, row: int, col: int):
-    pass
+def chomp(matrix: list, row: int, col: int):
+    # error handling
+    if row < 0 or cols < 0:
+        return None
 
-choco = create_chocolate_bar(5, 5)
-print_chocolate_bar(choco)
+    result = []
 
+    # reformat from user input to correct index
+    # row -= 1
+    # col -= 1
+
+    # loops for each row, checks if row is before chomp -> 
+    # if true: keeps that row intact, appends to result
+    for r in range(len(matrix)):
+        if r < row:
+            # rows before the chomp stay intact, save whole row
+            result.append(matrix[r][:])
+        else:
+            # rows at or below row get cut at col, save only up to col index
+            result.append(matrix[r][:col])
+    return result
