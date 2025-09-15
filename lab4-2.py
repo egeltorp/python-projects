@@ -60,10 +60,11 @@ def ask_cell_number(matrix: list):
 
 
 '''
-Trial run
+# Trial run
 choco = create_chocolate_bar(3,4)
 print_chocolate_bar(choco)
-toBite = ask_cell_number(choco)
-result = chomp(choco, toBite[0], toBite[1])
+row,col = ask_cell_number(choco)
+print(str(row) + "," + str(col))
+result = chomp(choco, row, col)
 print_chocolate_bar(result)
 '''
