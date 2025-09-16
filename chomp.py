@@ -74,7 +74,7 @@ def play():
         print("Ogiltigt antal, försök igen!")
     while True:
         cols = int(input("[?] Hur många kolumner ska chokladbaren bestå av (2-9): "))
-        if 2 <= rows <= 9: break
+        if 2 <= cols <= 9: break
         print("Ogiltigt antal, försök igen!")
 
     # generate first matrix using user-input values
