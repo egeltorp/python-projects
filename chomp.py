@@ -32,11 +32,10 @@ def print_chocolate_bar(matrix):
 def chomp(matrix: list, row: int, col: int):
     if row < 0 or col < 0:
         return None
-
-    result = []
+    
     for r in range(row, len(matrix)):
         del matrix[r][col:]
-
+        
     for r in range(len(matrix) - 1, -1, -1):
         if not matrix[r]:
             del matrix[r]
