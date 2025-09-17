@@ -9,18 +9,18 @@ def intro():
     print("* Spelet går ut på att undvika att välja P, den spelare som väljer P förlorar och den andra spelaren vinner.")
     print()
 
-# func to create the chocolate bar matrix
+# func to create the chocolate bar (matrix)
 def create_chocolate_bar(rows: int, cols: int):
     if rows <= 0 or cols <= 0:
         return None
-    chocolate = []
+    matrix = []
     for r in range(1, rows + 1):
         row = []
         for c in range(1, cols + 1):
             row.append(f"{r}{c}")
-        chocolate.append(row)
-    chocolate[0][0] = "P" # --> 'poison' 1st square
-    return chocolate
+        matrix.append(row)
+    matrix[0][0] = "P" # --> 'poison' 1st square
+    return matrix
 
 # print matrix in a formatted table
 def print_chocolate_bar(matrix):
@@ -74,7 +74,7 @@ def play():
         print("Ogiltigt antal, försök igen!")
     while True:
         cols = int(input("[?] Hur många kolumner ska chokladbaren bestå av (2-9): "))
-        if 2 <= rows <= 9: break
+        if 2 <= cols <= 9: break
         print("Ogiltigt antal, försök igen!")
 
     # generate first matrix using user-input values
