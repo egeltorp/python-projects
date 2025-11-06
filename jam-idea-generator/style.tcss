@@ -1,31 +1,24 @@
 Screen {
+	layout: grid;
 	align: center middle;
 }
 
-#top-bar {
-	align-horizontal: center;
-	margin-bottom: 2;
+#idea-grid {
+	grid-size: 3;
+	grid-gutter: 0;
+	width: 100%;
+	height: 1fr;
 }
 
-Button.toggle {
-	margin: 0 1;
-	width: 18;
+#idea-grid > * {
+	height: 1fr;
+	width: 1fr;
+	align: center middle;
+	content-align: center middle;
 }
 
 #generate-button {
-	margin-left: 2;
-	width: 30;
-	border: round $warning;
-	background: $warning;
-	color: black;
-
-}
-
-#idea-box {
-	border: solid white;
-	padding: 1 2;
-	width: 60%;
-    align: center middle;
-	text-align: center;
-	margin-top: 2;
+	dock: bottom;
+	margin: 1 0;
+	align-horizontal: center;
 }
