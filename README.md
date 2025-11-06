@@ -4,13 +4,12 @@
 
 - Egeltorp's Toolbox (toolbox.py)
 - Chomp by Egeltorp (chomp.py)
-
-More coming...
+- Jam Idea Generator (generator.py)
 
 ## Requirements
 
-- Python 3.x  
-- No external libraries needed (unless specified per project)
+- Must have: Python 3.x  
+- Jam Idea Generator: Rich, Textual, pyperclip
 
 ## How to Run
 Download any .py file and run from the Terminal. 
