@@ -2,101 +2,85 @@
 # @egeltorp 2025
 
 from textual.app import App, ComposeResult
-from textual.widgets import Static, Header, Footer, Button
-from textual.containers import Horizontal, Vertical
+from textual.widgets import Header, Footer, Static, Button
+from textual.containers import Grid
 from textual.reactive import reactive
+from rich.panel import Panel
+from rich.text import Text
+from rich.align import Align
 import random
+import json
+from pathlib import Path
 
-# Data
-themes = [
-	"cyberpunk", "medieval", "space", "post-apocalypse", "dream world", "underwater", "time travel"
-]
-mechanics = [
-	"turn-based combat", "puzzle solving", "deck-building", "base building", "resource management", "stealth"
-]
-constraints = [
-	"only two colors", "no text allowed", "made in under 3 hours", "one-button control", "must include frogs"
-]
+BASE_DIR = Path(__file__).resolve().parent
+DATA_FILE = BASE_DIR / "data.json"
 
-def random_theme():
-	return random.choice(themes)
+with open(DATA_FILE, "r", encoding="utf-8") as f:
+	data = json.load(f)
 
-def random_mechanic():
-	return random.choice(mechanics)
+themes = data["themes"]
+mechanics = data["mechanics"]
+constraints = data["constraints"]
 
-def random_constraint():
-	return random.choice(constraints)
+def generate_idea() -> dict:
+	return {
+		"theme": random.choice(themes),
+		"mechanic": random.choice(mechanics),
+		"constraint": random.choice(constraints),
+	}
 
+class IdeaBox(Static):
+	category: str
+	color: str
+	text = reactive("")
 
-class IdeaDisplay(Static):
-	idea_text = reactive("")
+	def __init__(self, category: str, color: str):
+		super().__init__()
+		self.category = category
+		self.color = color
 
-	def watch_idea_text(self, new_text: str):
-		self.update(new_text)
+	def watch_text(self, text: str):
+		content = Align.center(Text(text, style=f"bold {self.color}"), vertical="middle")
+		panel = Panel(
+			content,
+			title=f"[b]{self.category}[/b]",
+			border_style=self.color,
+			padding=(1, 2),
+			expand=True,
+		)
+		self.update(panel)
 
 class IdeaApp(App):
 	CSS_PATH = "style.tcss"
 
 	BINDINGS = [
-		("1", "toggle('theme')", "Toggle Theme"),
-		("2", "toggle('mechanic')", "Toggle Mechanic"),
-		("3", "toggle('constraint')", "Toggle Constraint"),
-		("space", "generate", "Generate New Idea"),
+		("space", "generate", "Generate Idea"),
 		("q", "quit", "Quit"),
 	]
 
 	def compose(self) -> ComposeResult:
 		yield Header(show_clock=True)
 
-		with Vertical():
-			with Horizontal(id="top-bar"):
-				self.generate_button = Button("Generate Idea (Space)", id="generate-button", variant="warning")
-				self.theme_button = Button("Theme [1]", id="theme", classes="toggle", variant="success")
-				self.mechanic_button = Button("Mechanic [2]", id="mechanic", classes="toggle", variant="success")
-				self.constraint_button = Button("Constraint [3]", id="constraint", classes="toggle", variant="success")
-				yield self.theme_button
-				yield self.mechanic_button
-				yield self.constraint_button
-				yield self.generate_button
+		with Grid(id="idea-grid"):
+			self.theme_box = IdeaBox("Theme", "cyan")
+			self.mechanic_box = IdeaBox("Mechanic", "green")
+			self.constraint_box = IdeaBox("Constraint", "magenta")
 
-			self.idea_box = IdeaDisplay(id="idea-box")
-			yield self.idea_box
+			yield self.theme_box
+			yield self.mechanic_box
+			yield self.constraint_box
 
 		yield Footer()
 
 	def on_mount(self):
-		print("\033[?25l", end="", flush=True)
-		self.set_focus(self.generate_button)
-		self.generate_new_idea()
+		self.theme = "textual-dark"
+		self.action_generate()
 
 	def action_generate(self):
-		self.generate_new_idea()
-
-	def action_toggle(self, category: str):
-		button = getattr(self, f"{category}_button")
-		# Toggle state
-		if button.variant == "success":
-			button.variant = "error"
-		else:
-			button.variant = "success"
-
-	def on_button_pressed(self, event: Button.Pressed):
-		if event.button.id == "generate-button":
-			self.generate_new_idea()
-		else:
-			self.action_toggle(event.button.id)
-
-	def generate_new_idea(self):
-		text = []
-
-		if self.theme_button.variant == "success":
-			text.append(f"Theme: {random_theme()}")
-		if self.mechanic_button.variant == "success":
-			text.append(f"Mechanic: {random_mechanic()}")
-		if self.constraint_button.variant == "success":
-			text.append(f"Constraint: {random_constraint()}")
-
-		self.idea_box.idea_text = "\n".join(text) if text else "No categories selected!"
+		new_idea = generate_idea()
+		self.theme_box.text = new_idea["theme"]
+		self.mechanic_box.text = new_idea["mechanic"]
+		self.constraint_box.text = new_idea["constraint"]
 
 
 if __name__ == "__main__":
