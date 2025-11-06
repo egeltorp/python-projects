@@ -1,0 +1,31 @@
+Screen {
+	align: center middle;
+}
+
+#top-bar {
+	align-horizontal: center;
+	margin-bottom: 2;
+}
+
+Button.toggle {
+	margin: 0 1;
+	width: 18;
+}
+
+#generate-button {
+	margin-left: 2;
+	width: 30;
+	border: round $warning;
+	background: $warning;
+	color: black;
+
+}
+
+#idea-box {
+	border: solid white;
+	padding: 1 2;
+	width: 60%;
+    align: center middle;
+	text-align: center;
+	margin-top: 2;
+}
