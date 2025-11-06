@@ -3,7 +3,7 @@
 ## Projects Included
 
 - 🎲 Egeltorp's Toolbox (toolbox.py)
-- Chomp by Egeltorp (Chomp.py)
+- Chomp by Egeltorp (chomp.py)
 
 More coming...
 
