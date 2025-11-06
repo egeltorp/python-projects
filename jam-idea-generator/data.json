@@ -1,0 +1,26 @@
+{
+	"themes": [
+		"Cyberpunk",
+		"Medieval",
+		"Space",
+		"Post-apocalypse",
+		"Dream world",
+		"Underwater",
+		"Time travel"
+	],
+	"mechanics": [
+		"Turn-based combat",
+		"Puzzle solving",
+		"Deck-building",
+		"Base building",
+		"Resource management",
+		"Stealth"
+	],
+	"constraints": [
+		"Only two colors",
+		"No text allowed",
+		"Made in under 3 hours",
+		"One-button control",
+		"Must include frogs"
+	]
+}
