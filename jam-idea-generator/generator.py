@@ -1,5 +1,12 @@
 # generator.py
 # @egeltorp 2025
+'''
+A simple Terminal app that generates 6 different ideas for aspects of making a video game.
+
+Requires Rich, Textual, and pyperclip to work.
+
+Must have both data.json and style.tcss in the same folder to work.
+'''
 
 # --- TEXTUAL ---
 from textual.app import App, ComposeResult
@@ -13,10 +20,14 @@ from rich.panel import Panel
 from rich.text import Text
 from rich.align import Align
 
+# --- PYPERCLIP ---
+import pyperclip
+
 # --- STANDARD ---
 import random
 import json
 from pathlib import Path
+from datetime import datetime
 
 # --- THEME ---
 egeltorp_theme = Theme(
@@ -24,7 +35,7 @@ egeltorp_theme = Theme(
     primary="#000000",
     secondary="#000000",
     accent="#000000",
-    foreground="#000000",
+    foreground="#FFFFFF",
     background="#000000",
     success="#000000",
     warning="#000000",
@@ -34,7 +45,7 @@ egeltorp_theme = Theme(
     dark=True,
     variables={
         "block-cursor-text-style": "none",
-        "footer-key-foreground": "#000000",
+        "footer-key-foreground": "#CDCDCD",
         "input-selection-background": "#000000",
     },
 )
@@ -93,6 +104,7 @@ class Generator(App):
 	BINDINGS = [
 		("space", "generate", "Generate Idea"),
 		("q", "quit", "Quit"),
+		("c", "copy", "Copy ideas to clipboard")
 	]
 
 	def compose(self) -> ComposeResult:
@@ -128,6 +140,22 @@ class Generator(App):
 		self.goal_box.text = new_idea["goal"]
 		self.setting_box.text = new_idea["setting"]
 		self.twist_box.text = new_idea["twist"]
+
+	def action_copy(self):
+		ideas = [
+		f"Theme: {self.theme_box.text}",
+		f"Mechanic: {self.mechanic_box.text}",
+		f"Constraint: {self.constraint_box.text}",
+		f"Goal: {self.goal_box.text}",
+		f"Setting: {self.setting_box.text}",
+		f"Twist: {self.twist_box.text}",
+		]
+		formatted = (
+			f"Generated on {datetime.now().strftime("%Y-%m-%d")}\n\n"
+			+ "\n".join(ideas)
+			)
+		pyperclip.copy(formatted)
+		self.notify("Copied all ideas to clipboard!", severity="information")
 
 # --- RUN ---
 if __name__ == "__main__":
